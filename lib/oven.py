@@ -127,8 +127,11 @@ class Oven (threading.Thread):
                         temperature_count = 0
                     # If the heat is on and nothing is changing, reset
                     # The direction or amount of change does not matter
-                    # This prevents runaway in the event of a sensor read failure                   
-                    if temperature_count > 20:
+                    # This prevents runaway in the event of a sensor read failure.
+                    # For room/space heating, set heat_response_watchdog_reads = 0
+                    # because space temperature changes slowly.
+                    watchdog_reads = getattr(config, 'heat_response_watchdog_reads', 20)
+                    if watchdog_reads and temperature_count > watchdog_reads:
                         log.info("Error reading sensor, oven temp not responding to heat.")
                         self.reset()
                 else:
