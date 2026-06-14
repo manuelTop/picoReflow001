@@ -57,6 +57,26 @@ sensor_time_wait = .5
 
 ########################################################################
 #
+#   Space heating thermostat mode
+#
+#   Enable this mode to use picoReflow as a simple room/space heater
+#   controller instead of a timed reflow profile controller.
+#
+#   WARNING: Do not rely on software alone for heater safety. Use correctly
+#   rated relays/contactors, fuses, grounding, an enclosure, and an
+#   independent thermal cutoff appropriate for your heater.
+
+space_heating_enabled = False
+space_heating_target = 20.0       # deg C target room temperature
+space_heating_hysteresis = 0.5    # deg C half-band; heat below target - band, stop above target + band
+space_heating_max_temp = 30.0     # deg C emergency software cutoff
+space_heating_min_temp = -10.0    # deg C sensor sanity lower bound
+space_heating_cool_output = False # keep cooling output off in thermostat mode
+space_heating_air_output = False  # keep air/fan output off in thermostat mode
+
+
+########################################################################
+#
 #   PID parameters
 
 pid_ki = 0.1  # Integration
@@ -85,4 +105,3 @@ sim_R_ho_air   = 0.05   # K/W  " with internal air circulation
 temp_scale          = "c" # c = Celsius | f = Fahrenheit - Unit to display 
 time_scale_slope    = "s" # s = Seconds | m = Minutes | h = Hours - Slope displayed in temp_scale per time_scale_slope
 time_scale_profile  = "s" # s = Seconds | m = Minutes | h = Hours - Enter and view target time in time_scale_profile
-
