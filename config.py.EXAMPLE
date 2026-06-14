@@ -74,6 +74,11 @@ space_heating_min_temp = -10.0    # deg C sensor sanity lower bound
 space_heating_cool_output = False # keep cooling output off in thermostat mode
 space_heating_air_output = False  # keep air/fan output off in thermostat mode
 
+# Original oven watchdog: number of unchanged sensor reads allowed while
+# heating before aborting. Set to 0 to disable. For room/space heating this
+# should normally stay disabled because space temperature changes slowly.
+heat_response_watchdog_reads = 0 if space_heating_enabled else 20
+
 
 ########################################################################
 #
